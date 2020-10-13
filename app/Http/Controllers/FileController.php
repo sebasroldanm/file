@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\file;
 use Illuminate\Http\Request;
+use GrahamCampbell\Flysystem\Facades\Flysystem;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -15,6 +17,8 @@ class FileController extends Controller
     public function index()
     {
         //
+        // $file = Flysystem::read('bg.jpg');
+
         return view('file.index');
     }
 
@@ -37,7 +41,20 @@ class FileController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+        // Flysystem::connection('sftp1')->put($name, 'sftp');
+        // Flysystem::connection('sftp2')->put($name, 'sftp');
+        Flysystem::connection('sftp1')->put('storage/app/public/avatar/' . $name, 'sftp');
+        Flysystem::connection('sftp2')->put('storage/app/public/avatar/' . $name, $name);
+
+        // Storage::disk('sftp1')->put('avatars/1', $request->file('file'));
+
+
+        // $archivo = $request->imagen->storeAs('beneficios', $img, 'public');
+
+
+        return view('file.index');
     }
 
     /**
