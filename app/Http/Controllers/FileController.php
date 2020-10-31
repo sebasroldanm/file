@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\file;
+use GrahamCampbell\Flysystem\Facades\Flysystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Filesystem;
 
 class FileController extends Controller
 {
@@ -37,7 +40,14 @@ class FileController extends Controller
     public function store(Request $request)
     {
         //
-        
+        // dd($request->file('file'));
+        $uploaded_file = $request->file('file');
+        // $contents = Storage::get($request->file('file'));
+        $file_name = $uploaded_file->getClientOriginalName();
+
+        // dd($file);
+        Flysystem::put($file_name, $contents);
+        echo 'Archivo Cargado';
     }
 
     /**

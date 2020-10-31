@@ -177,6 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
+
     ],
 
     /*
@@ -225,6 +227,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
 
     ],
 
